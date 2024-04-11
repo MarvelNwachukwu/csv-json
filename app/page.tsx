@@ -37,6 +37,7 @@ export default function Home() {
         const currentLine = lines[i].split(',');
 
         for (let j = 0; j < headers.length; j++) {
+          // @ts-ignore
           obj[headers[j]] = currentLine[j] || '';
         }
 
