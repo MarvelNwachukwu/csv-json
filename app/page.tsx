@@ -35,7 +35,7 @@ export default function Home() {
       for (let i = 1; i < lines.length; i++) {
         const obj = {};
         const currentLine = lines[i].split(',');
-
+        // @ts-ignore
         for (let j = 0; j < headers.length; j++) {
           // @ts-ignore
           obj[headers[j]] = currentLine[j] || '';
@@ -158,11 +158,7 @@ export default function Home() {
           />
         </Box>
         <Box as='main' w={'100%'}>
-          <Textarea
-            placeholder='Expect Result here'
-            value={json}
-            h={'100%'}
-          />{' '}
+          <Textarea placeholder='Expect Result here' value={json} h={'100%'} />{' '}
         </Box>
       </Flex>
     </Box>
