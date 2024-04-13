@@ -8,6 +8,8 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Link,
+  Select,
   Text,
   Textarea,
 } from '@chakra-ui/react';
@@ -20,6 +22,8 @@ export default function Home() {
   const [csv, setCsv] = React.useState('');
   const [csvFile, setCsvFile] = React.useState<File>();
   const [json, setJson] = React.useState('');
+  const [space, setSpace] = React.useState(2);
+
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -68,14 +72,19 @@ export default function Home() {
       header: true,
       complete: (result) => {
         console.log(result);
-        setJson(JSON.stringify(result.data, null, 4));
+        setJson(JSON.stringify(result.data, null, space));
       },
     });
   };
 
   const formatJsonData = (data: string) => {
     const jsonData = JSON.parse(data);
-    setJson(JSON.stringify(jsonData, null, 4));
+    setJson(JSON.stringify(jsonData, null, space));
+  };
+
+  const minifyJsonData = (data: string) => {
+    const jsonData = JSON.parse(data);
+    setJson(JSON.stringify(jsonData, null, 0));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,19 +144,26 @@ export default function Home() {
           />
         </Box>
         <Box w={'30%'} px={4} py={2} rounded={'md'} bg={'gray.100'}>
-          <Button
-            mt={4}
-            w={'100%'}
+          <ButtonComponent
+            buttonName='Convert'
             onClick={handleConvert}
-            isDisabled={handleDisableConvertButton()}
-            _disabled={{ opacity: 0.25, cursor: 'not-allowed' }}
+            disabled={handleDisableConvertButton()}
+          />
+
+          <Select
+            placeholder='Select option'
+            mt={4}
             colorScheme='teal'
-            variant='outline'
+            background={'transparent'}
+            color={'teal.600'}
+            onChange={(e) => setSpace(Number(e.target.value))}
           >
-            <Text as='span' color='teal.500'>
-              Convert
-            </Text>
-          </Button>
+            <option value='2' defaultChecked>
+              2 Tab Spaces
+            </option>
+            <option value='3'>3 Tab Spaces</option>
+            <option value='4'>4 Tab Spaces</option>
+          </Select>
 
           <ButtonComponent
             buttonName='Format JSON'
@@ -156,7 +172,23 @@ export default function Home() {
             }}
             disabled={!json}
           />
+          <ButtonComponent
+            buttonName='Minify JSON'
+            onClick={() => {
+              minifyJsonData(json);
+            }}
+            disabled={!json}
+          />
+
+          <ButtonComponent
+            buttonName='Buy me a coffee'
+            onClick={() => {
+              window.open('https://www.buymeacoffee.com/marvelcodes');
+            }}
+            // disabled={!json}
+          />
         </Box>
+
         <Box as='main' w={'100%'}>
           <Textarea placeholder='Expect Result here' value={json} h={'100%'} />{' '}
         </Box>

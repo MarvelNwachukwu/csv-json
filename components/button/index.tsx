@@ -2,13 +2,10 @@ import { Text, Button } from '@chakra-ui/react';
 import React, { FC, ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonName: string
+  buttonName: string;
 }
 
-const ButtonComponent: FC<ButtonProps> = ({
-  children,
-  ...restProps
-}) => {
+const ButtonComponent: FC<ButtonProps> = ({ children, ...restProps }) => {
   return (
     <Button
       mt={4}
@@ -26,4 +23,4 @@ const ButtonComponent: FC<ButtonProps> = ({
   );
 };
 
-export default ButtonComponent
+export default ButtonComponent;
