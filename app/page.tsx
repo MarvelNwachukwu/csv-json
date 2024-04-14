@@ -102,7 +102,7 @@ export default function Home() {
   };
 
   return (
-    <Box as='main' py={4} px={8} h={'100vh'}>
+    <Box as='main' py={4} px={8} h={{ base: 'auto', md: '100vh' }}>
       <Box as='header' fontSize={21} fontWeight={600} mb={8}>
         <Text>
           {'{ '}
@@ -117,10 +117,9 @@ export default function Home() {
         as='section'
         mt={4}
         flex={2}
-        flexDir={'row'}
+        direction={{ base: 'column', md: 'row' }}
         justifyContent={'space-between'}
         gap={4}
-        // bg={'gray.300'}
         h={'90%'}
       >
         <Box as='aside' w={'100%'}>
@@ -140,10 +139,10 @@ export default function Home() {
             placeholder='Paste CSV here'
             value={csv}
             onChange={handleChange}
-            h={'89.5%'}
+            h={'calc(100% - 96px)'}
           />
         </Box>
-        <Box w={'30%'} px={4} py={2} rounded={'md'} bg={'gray.100'}>
+        <Box w={{ base: '100%', md: '30%' }} px={4} py={2} rounded={'md'} bg={'gray.100'}>
           <ButtonComponent
             buttonName='Convert'
             onClick={handleConvert}
