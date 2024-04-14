@@ -142,7 +142,13 @@ export default function Home() {
             h={'calc(100% - 96px)'}
           />
         </Box>
-        <Box w={{ base: '100%', md: '30%' }} px={4} py={2} rounded={'md'} bg={'gray.100'}>
+        <Box
+          w={{ base: '100%', md: '30%' }}
+          px={4}
+          py={2}
+          rounded={'md'}
+          bg={'gray.100'}
+        >
           <ButtonComponent
             buttonName='Convert'
             onClick={handleConvert}
@@ -175,6 +181,14 @@ export default function Home() {
             buttonName='Minify JSON'
             onClick={() => {
               minifyJsonData(json);
+            }}
+            disabled={!json}
+          />
+
+          <ButtonComponent
+            buttonName='Copy JSON'
+            onClick={() => {
+              navigator.clipboard.writeText(json);
             }}
             disabled={!json}
           />
