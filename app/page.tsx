@@ -101,6 +101,19 @@ export default function Home() {
     return false;
   };
 
+  const downloadJsonFile = () => {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'output.json';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
+
   return (
     <Box as='main' py={4} px={8} h={{ base: 'auto', md: '100vh' }}>
       <Box as='header' fontSize={21} fontWeight={600} mb={8}>
@@ -194,11 +207,23 @@ export default function Home() {
           />
 
           <ButtonComponent
+            buttonName='Download JSON'
+            onClick={downloadJsonFile}
+            disabled={!json}
+          />
+
+          <ButtonComponent
+            buttonName='About Me'
+            onClick={() => {
+              window.open('https://drive.google.com/file/d/1NS8dJsYLp2jqIeryvEzfzILL3PwxosZC/view');
+            }}
+          />
+
+          <ButtonComponent
             buttonName='Buy me a coffee'
             onClick={() => {
               window.open('https://www.buymeacoffee.com/marvelcodes');
             }}
-            // disabled={!json}
           />
         </Box>
 
