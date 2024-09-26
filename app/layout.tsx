@@ -25,6 +25,7 @@ export default function RootLayout({
         src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6171078836003402'
         crossOrigin='anonymous'
       />
+      <Script defer src="https://cloud.umami.is/script.js" data-website-id="89a40934-85d5-490d-b086-304cc7e164f4" />
       <GoogleAnalytics gaId='G-VEFMSGZYZV' />
       <Analytics/>
 

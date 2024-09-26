@@ -33,27 +33,35 @@ export default function Home() {
   const handleConvert = () => {
     const csvToJson = (csv: string) => {
       const lines = csv.split('\n');
-      const headers = lines[0].split(',');
+      const headers = lines[0].split(',').map(header => header.trim());
       const jsonArray = [];
 
       for (let i = 1; i < lines.length; i++) {
-        const obj = {};
-        const currentLine = lines[i].split(',');
-        // @ts-ignore
-        for (let j = 0; j < headers.length; j++) {
-          // @ts-ignore
-          obj[headers[j]] = currentLine[j] || '';
+        const obj: { [key: string]: string } = {};
+        let currentLine = lines[i];
+        let inQuotes = false;
+        let currentField = '';
+        let fieldIndex = 0;
+
+        for (let j = 0; j < currentLine.length; j++) {
+          if (currentLine[j] === '"') {
+            inQuotes = !inQuotes;
+          } else if (currentLine[j] === ',' && !inQuotes) {
+            obj[headers[fieldIndex]] = currentField.trim();
+            currentField = '';
+            fieldIndex++;
+          } else {
+            currentField += currentLine[j];
+          }
         }
 
+        // Add the last field
+        obj[headers[fieldIndex]] = currentField.trim();
         jsonArray.push(obj);
       }
 
       return jsonArray;
     };
-
-    const csvString = `header1,header2,header3
-    value1,value2,value3
-    value4,value5,value6`;
 
     if (csv && !csvFile) {
       const jsonData = csvToJson(csv);
