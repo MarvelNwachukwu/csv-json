@@ -25,9 +25,9 @@ export default function RootLayout({
         src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6171078836003402'
         crossOrigin='anonymous'
       />
-      <GoogleAnalytics gaId='G-5LT6F846' />
+      <GoogleAnalytics gaId='G-VEFMSGZYZV' />
       <Analytics/>
-      
+
       <body className={inter.className}>
         <GoogleTagManager gtmId='GTM-5LT6F846' />
         <Providers>{children}</Providers>
