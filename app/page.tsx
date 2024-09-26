@@ -12,8 +12,9 @@ import {
   Select,
   Text,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { motion } from 'framer-motion';
 import Papa from 'papaparse';
 import ButtonComponent from '@/components/button';
@@ -121,6 +122,27 @@ export default function Home() {
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
   }
+
+
+  const toast = useToast();
+
+  useEffect(() => {
+    toast({
+      title: "Data Privacy Notice",
+      description: (
+        <>
+          We don&apos;t store or have access to any data. All conversions are done in your browser.
+          <Link href="https://github.com/MarvelNwachukwu/csv-json" isExternal color="white" fontWeight={600} ml={1}>
+            View source on GitHub
+          </Link>
+        </>
+      ),
+      status: "info",
+      duration: 20000,
+      isClosable: true,
+      position: "bottom",
+    });
+  }, []);
 
   return (
     <Box as='main' py={4} px={8} h={{ base: 'auto', md: '100vh' }}>
